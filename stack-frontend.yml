@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  frontend:
+    # Troque SEU_USUARIO_GITHUB pelo seu usuário ou organização do GitHub.
+    image: ghcr.io/SEU_USUARIO_GITHUB/kanbanfront-recuperado:latest
+    environment:
+      KANBANCW_DOMAIN: ihardcrmkanban.mencione.me
+      VITE_API_URL: https://ihardcrmkanban.mencione.me
+    networks:
+      - network_public
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+
+networks:
+  network_public:
+    external: true
+    name: network_public
